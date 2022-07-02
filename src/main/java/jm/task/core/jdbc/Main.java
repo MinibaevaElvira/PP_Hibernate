@@ -3,22 +3,24 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.UserService;
+import jm.task.core.jdbc.service.UserServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        UserDao userDao1 = new UserDaoHibernateImpl();
-        userDao1.createUsersTable();
-        userDao1.saveUser("Антон", "Чехов", (byte) 44);
-        userDao1.saveUser("Альбер", "Камю", (byte) 46);
-        userDao1.saveUser("Франц", "Кафка", (byte) 41);
-        userDao1.saveUser("Уильям", "Моэм", (byte) 91);
+        UserService userService = new UserServiceImpl();
+        userService.createUsersTable();
+        userService.saveUser("Антон", "Чехов", (byte) 44);
+        userService.saveUser("Альбер", "Камю", (byte) 46);
+        userService.saveUser("Франц", "Кафка", (byte) 41);
+        userService.saveUser("Уильям", "Моэм", (byte) 91);
 
-        for (User user : userDao1.getAllUsers()) {
+        for (User user : userService.getAllUsers()) {
             System.out.println(user);
         }
-        userDao1.removeUserById(1);
-        userDao1.cleanUsersTable();
-        userDao1.dropUsersTable();
+        userService.removeUserById(1);
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
 
 //        Util.getConnection();
 //        UserDao userDao = new UserDaoJDBCImpl();

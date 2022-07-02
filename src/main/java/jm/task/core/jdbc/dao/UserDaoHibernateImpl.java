@@ -15,16 +15,13 @@ public class UserDaoHibernateImpl implements UserDao {
     private Session session;
     private Transaction transaction ;
 
-    public UserDaoHibernateImpl() {
-
-    }
-
+    public UserDaoHibernateImpl() {}
 
     @Override
     public void createUsersTable() {
-        session = getSessionFactory().openSession();
-        transaction = session.beginTransaction();
         try {
+            session = getSessionFactory().openSession();
+            transaction = session.beginTransaction();
             String sql = "CREATE TABLE IF NOT EXISTS schema.database " +
                     "(id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
                     " name VARCHAR(15)," +
@@ -40,9 +37,9 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void dropUsersTable() {
-        session = getSessionFactory().openSession();
-        transaction = session.beginTransaction();
         try {
+            session = getSessionFactory().openSession();
+            transaction = session.beginTransaction();
             String sql = "DROP TABLE IF EXISTS schema.database";
             session.createNativeQuery(sql).executeUpdate();
             transaction.commit();
